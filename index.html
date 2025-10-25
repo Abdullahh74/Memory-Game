@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./jquery-3.7.1.js"></script>
+</head>
+<body>
+  <div id="sidebar">
+      <div id="logo">🎴 Memory Game</div>
+      <div id="levels">
+        <h3>Choose Level</h3>
+        <select id="level">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+    <div id="score-board">
+      Attempts: <span id="moves">0</span>
+    </div>
+  </div>
+  <div id="main-game">
+    <div id="game-board"></div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+</html>
