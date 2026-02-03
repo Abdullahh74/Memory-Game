@@ -1,38 +1,33 @@
 $(document).ready(function() {
   function getSymbols(level) {
-    let easy = ['🍎','🍎','🍌','🍌'];
+    const symbolsByLevel = {
+      easy: ['🍎', '🍎', '🍌', '🍌'],
+      medium: ['🍎', '🍎', '🍌', '🍌', '🍒', '🍒', '🍇', '🍇', '🍉', '🍉', '🍍', '🍍', '🥝', '🥝', '🍓', '🍓'],
+      hard: ['🍎', '🍎', '🍎', '🍎', '🍒', '🍒', '🍒', '🍒', '🍉', '🍉', '🍉', '🍉',
+        '🥝', '🥝', '🥝', '🥝', '🥥', '🥥', '🥥', '🥥', '🍊', '🍊', '🍊', '🍊',
+        '🥭', '🥭', '🥭', '🥭', '🍋', '🍋', '🍋', '🍋', '🍆', '🍆', '🍆', '🍆'],
+      advanced: ['🍎', '🍎', '🍌', '🍌', '🍒', '🍒', '🍇', '🍇', '🍉', '🍉', '🍍', '🍍',
+        '🥝', '🥝', '🍓', '🍓', '🥥', '🥥', '🍑', '🍑', '🍊', '🍊', '🍐', '🍐',
+        '🥭', '🥭', '🍈', '🍈', '🍋', '🍋', '🍏', '🍏', '🍆', '🍆', '🌽', '🌽'],
+    };
 
-    let medium = ['🍎','🍎','🍌','🍌','🍒','🍒','🍇','🍇','🍉','🍉','🍍','🍍','🥝','🥝','🍓','🍓'];
-
-    let hard = ['🍎','🍎','🍎','🍎','🍒','🍒','🍒','🍒','🍉','🍉','🍉','🍉',
-                '🥝','🥝','🥝','🥝','🥥','🥥','🥥','🥥','🍊','🍊','🍊','🍊',
-                '🥭','🥭','🥭','🥭','🍋','🍋','🍋','🍋','🍆','🍆','🍆','🍆'];
-
-    let Advanced = ['🍎','🍎','🍌','🍌','🍒','🍒','🍇','🍇','🍉','🍉','🍍','🍍',
-                    '🥝','🥝','🍓','🍓','🥥','🥥','🍑','🍑','🍊','🍊','🍐','🍐',
-                    '🥭','🥭','🍈','🍈','🍋','🍋','🍏','🍏','🍆','🍆','🌽','🌽'];
-
-    if (level === "easy") return easy;
-    if (level === "hard") return hard;
-    if (level === "Advanced") return Advanced;
-    return medium;
+    return symbolsByLevel[level] ?? symbolsByLevel.medium;
   }
 
   function setGrid(level) {
-    if (level === "easy") {
-      $("#game-board").css("grid-template-columns", "repeat(2, 80px)");
-    } else if (level === "hard") {
-      $("#game-board").css("grid-template-columns", "repeat(6, 80px)");
-    } else if (level === "Advanced"){
-      $("#game-board").css("grid-template-columns", "repeat(6, 80px)");
-    } else {
-      $("#game-board").css("grid-template-columns", "repeat(4, 80px)");
-    }
+    const columnsByLevel = {
+      easy: 2,
+      medium: 4,
+      hard: 6,
+      advanced: 6,
+    };
+
+    const columns = columnsByLevel[level] ?? columnsByLevel.medium;
+    $("#game-board").css("grid-template-columns", `repeat(${columns}, 80px)`);
   }
 
   function buildGame(level) {
-    let symbols = getSymbols(level);
-    symbols = symbols.sort(() => 0.5 - Math.random());
+    let symbols = [...getSymbols(level)].sort(() => 0.5 - Math.random());
 
     $("#game-board").empty();
     setGrid(level);
